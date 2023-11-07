@@ -5,6 +5,8 @@ import com.botscrew.testTask.services.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 @RequiredArgsConstructor
 public class AverageSalaryCommand implements CommandsGenerator {
@@ -17,9 +19,13 @@ public class AverageSalaryCommand implements CommandsGenerator {
 
     @Override
     public void sendAnswer(String departmentName) {
-        Department department = departmentService.getDepartment(departmentName);
-        double averageSalary = department.getLectors().stream().mapToDouble(
-                lector -> lector.getSalary().doubleValue()).average().orElse(0);
-        System.out.println("The average salary of " + departmentName + " is " + averageSalary);
+        Optional<Department> department = departmentService.getDepartment(departmentName);
+        if (department.isPresent()) {
+            double averageSalary = department.get().getLectors().stream().mapToDouble(
+                    lector -> lector.getSalary().doubleValue()).average().orElse(0);
+            System.out.println("The average salary of " + departmentName + " is " + averageSalary);
+        } else {
+            System.out.println("Department " + departmentName + " not found");
+        }
     }
 }

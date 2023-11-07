@@ -1,8 +1,11 @@
 package com.botscrew.testTask.commands;
 
+import com.botscrew.testTask.entities.Department;
 import com.botscrew.testTask.services.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -16,7 +19,11 @@ public class WhoIsHeadCommand implements CommandsGenerator {
 
     @Override
     public void sendAnswer(String departmentName) {
-        String headOfDepartmentName = departmentService.getDepartment(departmentName).getHeadOfDepartment().getFullName();
-        System.out.println("Head of " + departmentName + " department is " + headOfDepartmentName);
+        Optional<Department> department = departmentService.getDepartment(departmentName);
+        if (department.isPresent()) {
+            System.out.println("Head of " + departmentName + " department is " + department.get().getHeadOfDepartment().getFullName());
+        } else {
+            System.out.println("Department " + departmentName + " not found");
+        }
     }
 }

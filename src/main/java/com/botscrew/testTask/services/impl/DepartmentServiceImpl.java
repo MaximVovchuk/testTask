@@ -4,11 +4,11 @@ import com.botscrew.testTask.entities.Department;
 import com.botscrew.testTask.repositories.DepartmentRepository;
 import com.botscrew.testTask.services.DepartmentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -17,8 +17,8 @@ public class DepartmentServiceImpl implements DepartmentService {
     private final DepartmentRepository departmentRepository;
 
     @Override
-    public Department getDepartment(String departmentName) {
-        return departmentRepository.findByDepartmentName(departmentName).orElseThrow(IllegalArgumentException::new);
+    public Optional<Department> getDepartment(String departmentName) {
+        return departmentRepository.findByDepartmentName(departmentName);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.botscrew.testTask.entities;
 
 public enum Degree { // converter is in /util
-    ASSISTANT(1),
-    ASSOCIATE_PROFESSOR(2),
-    PROFESSOR(3);
+    ASSISTANT(0),
+    ASSOCIATE_PROFESSOR(1),
+    PROFESSOR(2);
     private final Integer code;
 
     Degree(Integer code) {

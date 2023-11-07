@@ -28,12 +28,10 @@ public class SearchByTemplateCommand implements CommandsGenerator {
                 .filter(fullName -> fullName.contains(template)).forEach(answers::add);
         departmentService.getAll().stream().map(Department::getDepartmentName)
                 .filter(name -> name.contains(template)).forEach(answers::add);
-        for (int i = 0; i < answers.size(); i++) {
-            System.out.print(answers.get(i));
-            if (i < answers.size() - 1) {
-                System.out.print(", ");
-            }
+        if (answers.isEmpty()) {
+            System.out.println("Nothing found");
+        } else {
+            System.out.println(String.join(", ", answers));
         }
-        System.out.println();
     }
 }
