@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: lector
+      author: maksym_vovchuk
+      changes:
+        - sqlFile:
+            path: 0001-lector.sql
+            relativeToChangelogFile: true
+
+  - changeSet:
+      id: department
+      author: maksym_vovchuk
+      changes:
+        - sqlFile:
+            path: 0005-department.sql
+            relativeToChangelogFile: true
+
+  - changeSet:
+      id: lector_alter
+      author: maksym_vovchuk
+      changes:
+        - sqlFile:
+            path: 0008-lector_department.sql
+            relativeToChangelogFile: true
